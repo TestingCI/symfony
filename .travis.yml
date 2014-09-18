@@ -21,11 +21,7 @@ before_install:
     - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm-nightly" ] && [ $(php -r "echo PHP_MINOR_VERSION;") -le 4 ]; then echo "extension = apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
     - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm-nightly" ]; then echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
     - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm-nightly" ]; then echo "extension = memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
-    - sudo locale-gen fr_FR.UTF-8 && sudo update-locale
-<<<<<<< HEAD
-    - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
-=======
->>>>>>> 2.4
+  #  - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
 #    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "5.3.3" ]; then phpunit --self-update; fi;'
 
 
@@ -38,6 +34,7 @@ install:
 script:
     - ls -d src/Symfony/*/* | parallel --gnu --keep-order 'echo "Running {} tests"; phpunit --exclude-group tty,benchmark {};'
     - echo "Running tests requiring tty"; phpunit --group tty
+
 notifications:
   email: 
     - vidya@shippable.com
