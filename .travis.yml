@@ -28,9 +28,17 @@ before_install:
 >>>>>>> 2.4
 #    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "5.3.3" ]; then phpunit --self-update; fi;'
 
+
+
 install:
     - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source install
+
+
 
 script:
     - ls -d src/Symfony/*/* | parallel --gnu --keep-order 'echo "Running {} tests"; phpunit --exclude-group tty,benchmark {};'
     - echo "Running tests requiring tty"; phpunit --group tty
+notifications:
+  email: 
+    - vidya@shippable.com
+    - buildsampletest@gmail.com 
